@@ -24,7 +24,6 @@ def OnMouseClicked(event, x, y, flags, param):
     if event is cv2.EVENT_LBUTTONUP:
         drag_start = None
         track_window = selection
-        selection = None
 
 if __name__ == '__main__':
     cv2.namedWindow("image", cv2.WINDOW_AUTOSIZE)
@@ -33,14 +32,12 @@ if __name__ == '__main__':
     while(1):
         ret, frame = cap.read() 
 
-        if start_flag is True:
+        if start_flag:
             while True:
-                img_first = frame.copy()
-                if track_window:
-                    cv2.rectangle(img_first, (track_window[0], track_window[1]), (track_window[2], track_window[3]), (0,0,255), 1)
-                elif selection:
-                    cv2.rectangle(img_first, (selection[0], selection[1]), (selection[2], selection[3]), (0,0,255), 1)
-                cv2.imshow("image", img_first)
+                ret, frame = cap.read()
+                if selection:
+                    cv2.rectangle(frame, (selection[0], selection[1]), (selection[2], selection[3]), (0,0,255), 1)
+                cv2.imshow("image", frame)
                 if cv2.waitKey(5) == 13:
                     break
             start_flag = False
