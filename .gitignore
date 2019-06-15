@@ -1,0 +1,4 @@
+PythonVirtualenv/
+.vscode/
+MasterSamplePhoto/
+Code/__pycache__/
